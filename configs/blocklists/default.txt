@@ -1,0 +1,2 @@
+https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt
+https://blocklistproject.github.io/Lists/youtube.txt
