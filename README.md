@@ -1,10 +1,10 @@
 # Raspberry Pi Home Server Features
 
-Collection of cool features to run on a Raspberry Pi home server, focused on improving daily digital life.
+Collection of cool features to run on a Raspberry Pi (or other Linux host) to improve your home network and media experience.
 
 ## Quick start (Pi-hole + SmartTubeNext)
 
-On the Raspberry Pi (install Pi-hole using the included script):
+1) Prepare the host (Raspberry Pi recommended)
 
 ```bash
 sudo apt update && sudo apt upgrade -y
@@ -13,20 +13,37 @@ sudo sh get-docker.sh
 sudo apt install -y docker-compose
 git clone https://github.com/YOUR_USERNAME/raspberry-pi-home-server.git
 cd raspberry-pi-home-server
-./scripts/install-adblocker.sh
+cp .env.example .env        # edit .env to set a secure WEBPASSWORD
+./scripts/setup-pi.sh
 ```
 
-On Google TV (install SmartTubeNext):
+2) (Optional) Import recommended blocklists
 
-1. Install `Downloader` from Play Store.
-2. Settings → Security → Allow `Downloader` to install apps.
-3. In `Downloader` enter: `https://github.com/yuliskov/SmartTubeNext/releases/latest/download/smarttube_next.apk` and install.
+```bash
+./scripts/import-blocklists.sh
+```
 
-Features
+3) Configure your network
 
-- Ad blocking
-	- Google TV YouTube: `features/ad-blocking/google-tv/README.md`
-	- Network-wide Pi-hole: `features/ad-blocking/network-wide/pihole-setup.md`
-- (To be continued...)
+- Set your router's DHCP to hand out the Raspberry Pi IP as primary DNS (recommended), or set the DNS on each device manually.
 
-Enjoy your improved Raspberry Pi home server!
+4) Install SmartTubeNext on Google TV
+
+- Install the `Downloader` app on Google TV and allow installs from it.
+- In `Downloader` enter: https://github.com/yuliskov/SmartTubeNext/releases/latest/download/smarttube_next.apk and install.
+
+**Notes & Safety**
+
+- Edit `./.env` to set a secure `WEBPASSWORD` before exposing the Pi-hole admin UI.
+- Backups: see `docs/BACKUP.md` and `scripts/backup.sh` for Teleporter and filesystem backups.
+- If you want Pi automatic start on boot, use the example systemd unit `scripts/pihole.service` (update the working directory placeholder).
+
+**Features**
+
+All features are in the `features/` folder with documentation.
+
+Examples:
+- Ad-free YouTube on Google TV: [features/ad-blocking/google-tv/README.md](features/ad-blocking/google-tv/README.md)
+- (More coming soon...)
+
+Enjoy your Raspberry Pi home server!
