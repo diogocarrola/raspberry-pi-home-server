@@ -20,22 +20,40 @@ if ! command -v docker-compose >/dev/null 2>&1; then
   sudo apt install -y docker-compose
 fi
 
+if [ ! -f .env ]; then
+  if [ -f .env.example ]; then
+    cp .env.example .env
+    echo "⚙️  Created .env from .env.example — please edit .env to set a secure WEBPASSWORD if desired."
+  else
+    cat > .env <<'EOF'
+WEBPASSWORD=change_this_password
+TZ=Europe/Lisbon
+DNS1=1.1.1.1
+DNS2=8.8.8.8
+EOF
+    echo "⚙️  Created default .env — please edit .env to set a secure WEBPASSWORD."
+  fi
+fi
+
 if [ ! -f docker-compose.yml ]; then
   cat > docker-compose.yml <<'EOF'
 version: "3"
+
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
+    env_file:
+      - .env
     ports:
       - "53:53/tcp"
       - "53:53/udp"
       - "80:80/tcp"
     environment:
-      TZ: 'Europe/Lisbon'
-      WEBPASSWORD: 'change_this_password'
-      DNS1: '1.1.1.1'
-      DNS2: '8.8.8.8'
+      - TZ=${TZ}
+      - WEBPASSWORD=${WEBPASSWORD}
+      - DNS1=${DNS1}
+      - DNS2=${DNS2}
     volumes:
       - './pihole-config:/etc/pihole'
       - './pihole-dnsmasq:/etc/dnsmasq.d'
