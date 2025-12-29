@@ -1,0 +1,6 @@
+.env
+pihole-config/
+pihole-dnsmasq/
+backups/
+node_modules/
+*.log
