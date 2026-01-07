@@ -4,3 +4,5 @@ pihole-dnsmasq/
 backups/
 node_modules/
 *.log
+captures/
+*.pcap

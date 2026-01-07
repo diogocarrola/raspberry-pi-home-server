@@ -1,0 +1,9 @@
+# RTP Play candidate blocklist
+# Populate this file AFTER performing the network capture / investigation steps in
+# features/ad-blocking/rtp-play/README.md
+#
+# Example format: one domain or comment per line
+# ad-server-example.com
+# ads.cdn-provider.net
+
+# --- add discovered domains below this line ---
