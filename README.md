@@ -43,7 +43,6 @@ cp .env.example .env        # edit .env to set a secure WEBPASSWORD
 All features are in the `features/` folder with documentation.
 
 Examples:
-- Ad-free YouTube on Google TV: [features/ad-blocking/google-tv/README.md](features/ad-blocking/google-tv/README.md)
-- (More coming soon...)
+	- RTP Play (Portugal): [features/ad-blocking/rtp-play/README.md](features/ad-blocking/rtp-play/README.md)
 
 Enjoy your Raspberry Pi home server!
