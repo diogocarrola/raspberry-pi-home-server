@@ -47,6 +47,16 @@ After capturing traffic, use the helper to extract candidate domains (DNS querie
 
 Review `/tmp/rtp-domains.txt`, pick high-confidence ad domains and add them to `configs/blocklists/rtp-play.txt`.
 
+Interactive review helper
+
+To make curation easier there's an interactive helper that prompts you for each extracted domain and appends selected domains to the feature blocklist:
+
+```bash
+./scripts/review-domains.sh /tmp/rtp-domains.txt
+```
+
+Options: type `y` to add, `a` to add this and all remaining entries, `q` to quit and keep progress so far.
+
 Mitigation options
 
 - Network-level (recommended first): Add discovered ad domains to Pi-hole / AdGuard Home blocklists; set router/DHCP to use Pi as DNS.
